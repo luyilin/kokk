@@ -1,0 +1,66 @@
+{
+  "name": "kokk",
+  "version": "0.0.1",
+  "description": "A beautiful way to display a demo and the usage from markdown.",
+  "repository": {
+    "url": "luyilin/kokk",
+    "type": "git"
+  },
+  "main": "dist/kokk.cjs.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm test && npm run build",
+    "lint": "eslint . --ext .js --ext .vue",
+    "test": "npm run lint && tyu",
+    "build": "bili",
+    "example": "poi",
+    "build:example": "poi build"
+  },
+  "author": {
+    "name": "luyilin",
+    "email": "luyilin12@gmail.com"
+  },
+  "license": "MIT",
+  "poi": {
+    "entry": "example/index.js",
+    "dist": "example/dist",
+    "homepage": "./"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:vue/recommended"
+    ],
+    "rules": {
+      "vue/max-attributes-per-line": [
+        2,
+        {
+          "singleline": 2,
+          "multiline": {
+            "max": 2,
+            "allowFirstLine": true
+          }
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "bili": "^1.3.3",
+    "eslint": "^4.14.0",
+    "eslint-plugin-vue": "^4.0.1",
+    "poi": "^9.3.10",
+    "rollup-plugin-vue": "^2.5.2",
+    "tyu": "^1.0.0",
+    "vue-test-utils": "^1.0.0-beta.9"
+  },
+  "dependencies": {
+    "marked3": "^0.5.2",
+    "node-sass": "^4.7.2",
+    "prismjs": "^1.11.0",
+    "sass-loader": "^6.0.6",
+    "unfetch": "^3.0.0",
+    "vue-cute-rate": "^0.0.3",
+    "vue-style-loader": "^4.0.2"
+  }
+}
