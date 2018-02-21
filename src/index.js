@@ -1,7 +1,7 @@
-import kokk from './App.vue'
+import Kokk from './App.vue'
 
-export default kokk
+export default Kokk
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.component(kokk.name, kokk)
+  window.Vue.component(Kokk.name, Kokk)
 }

@@ -1,6 +1,6 @@
 {
   "name": "kokk",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A beautiful way to display a demo and the usage from markdown.",
   "repository": {
     "url": "luyilin/kokk",
@@ -13,7 +13,7 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext .js --ext .vue",
-    "test": "npm run lint && tyu",
+    "test": "tyu",
     "build": "poi build --component kokk",
     "example": "poi -c example/poi.config.js",
     "build:example": "poi build -c example/poi.config.js"

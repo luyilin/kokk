@@ -27,7 +27,7 @@
   import highlight from './utils/highlight'
 
   export default {
-    name: 'kokk',
+    name: 'Kokk',
 
     props: {
       title: {
@@ -43,6 +43,7 @@
         default: false
       },
       highlight: {
+        type: [Boolean, Function],
         default: true
       },
       root: {
@@ -63,18 +64,18 @@
       }
     },
 
-    watch: {
-      expandAll(i) {
-        this.codeExpand = i
-      }
-    },
-
     computed: {
       iconShow () {
         return this.codeExpand ? 'icon-hide' : 'icon-show'
       },
       iconHide () {
         return this.codeExpand ? 'icon-show' : 'icon-hide'
+      }
+    },
+
+    watch: {
+      expandAll(i) {
+        this.codeExpand = i
       }
     },
 
