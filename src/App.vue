@@ -63,6 +63,12 @@
       }
     },
 
+    watch: {
+      expandAll(i) {
+        this.codeExpand = i
+      }
+    },
+
     computed: {
       iconShow () {
         return this.codeExpand ? 'icon-hide' : 'icon-show'
@@ -205,6 +211,7 @@
       left: 50%;
       transform: translate(-50%, -13px);
       transition: all .08s ease-out;
+      z-index: 2;
     }
     .btn-hover:before {
       content: "";
