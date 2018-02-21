@@ -16,7 +16,7 @@
     "test": "npm run lint && tyu",
     "build": "poi build --component kokk",
     "example": "poi -c example/poi.config.js",
-    "build:example": "poi build"
+    "build:example": "poi build -c example/poi.config.js"
   },
   "author": {
     "name": "luyilin",

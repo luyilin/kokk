@@ -2,9 +2,9 @@
 
 [![NPM version](https://img.shields.io/npm/v/kokk.svg?style=flat)](https://npmjs.com/package/kokk) [![NPM downloads](https://img.shields.io/npm/dm/kokk.svg?style=flat)](https://npmjs.com/package/kokk) [![CircleCI](https://circleci.com/gh/luyilin/kokk/tree/master.svg?style=shield)](https://circleci.com/gh/luyilin/kokk/tree/master)
 
-[DEMO](https://kokk.netlify.com/)
+[DEMO](https://kokk.netlify.com/example/dist/)
 
-A package's [examples page](https://vue-cute-rate.netlify.com/example/dist/) which powered by kokk.
+A [examples page](https://vue-cute-rate.netlify.com/example/dist/) which powered by kokk.
 
 ## Introduction
 
