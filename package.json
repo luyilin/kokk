@@ -30,7 +30,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "plugin:vue/essential"
+      "plugin:vue/recommended"
     ],
     "rules": {
       "vue/max-attributes-per-line": [

@@ -1,6 +1,6 @@
 ```vue
 <template>
-  <star-rate slot="demo" :value="3"
+  <star-rate :value="3"
              type="star1"/>
 </template>
 

@@ -2,6 +2,12 @@
 
 [![NPM version](https://img.shields.io/npm/v/kokk.svg?style=flat)](https://npmjs.com/package/kokk) [![NPM downloads](https://img.shields.io/npm/dm/kokk.svg?style=flat)](https://npmjs.com/package/kokk) [![CircleCI](https://circleci.com/gh/luyilin/kokk/tree/master.svg?style=shield)](https://circleci.com/gh/luyilin/kokk/tree/master)
 
+[DEMO](https://kokk.netlify.com/)
+
+A package's [examples page](https://vue-cute-rate.netlify.com/example/dist/) which powered by kokk.
+
+## Introduction
+
 A beautiful way to display a demo and the usage from markdown.
 
 The design is inspired by [Ant Design](https://ant.design/)! I like the elegant design to display a demo.
@@ -52,14 +58,14 @@ The title of the demo.
 Type: `string`<br>
 Default: `Basic`
 
-The title of the demo.
+The description of the demo.
 
 ### expandAll
 
 Type: `boolean`<br>
 Default: `false`
 
-The title of the demo.
+Whether to expand code.
 
 ### highlight
 
@@ -77,18 +83,18 @@ function highlight(code, lang) {}
 Type: `string`<br>
 Default: `./`
 
-The relative path of the markdown file.
+The path of the markdown file.
 
 ### doc
 
 Type: `string`<br>
 Default: `demo.md`
 
-The name markdown file.
+The name of the markdown file.
 
 ## Slot
 
-Import the package which you want to show and use it as a slot.
+The live demo which you want to display, make sure to use `demo` as the slot name.
 
 Here is a simple example:
 

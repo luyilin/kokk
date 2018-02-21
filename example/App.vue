@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <kokk root="./docs/">
+    <kokk root="/docs/">
       <star-rate slot="demo" :value="3"
                  type="star1"/>
     </kokk>
