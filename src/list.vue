@@ -1,30 +1,33 @@
 <template>
   <div class="main">
-    <div class="content" v-html="html"></div>
-    <h2 class="demo-title">
-      {{ title }}
-      <svg @click="expandAll = !expandAll"
-           t="1519462199298" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2155" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><path d="M411.485726 111.200056H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 111.200056H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM411.485726 554.844281H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 554.844281H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032z" fill="#515151" p-id="2156"></path></svg>
-    </h2>
-    <div class="examples">
-      <div class="left" v-for="i, index in leftDoc">
-        <demo :expandAll="expandAll" :doc="i"
-              :root="root" :highlight="highlight"
-              :length="docList.length">
-          <slot :name="demoIndex('left', index)"
-                :slot="demoIndex('left', index)"/>
-        </demo>
+    <v-loading v-if="loading" color="#7175b1"></v-loading>
+    <div class="content" v-else>
+      <div v-html="html"></div>
+      <h2 class="demo-title">
+        {{ demoTitle }}
+        <svg @click="expandAll = !expandAll"
+             t="1519462199298" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2155" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><path d="M411.485726 111.200056H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 111.200056H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM411.485726 554.844281H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 554.844281H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032z" fill="#515151" p-id="2156"></path></svg>
+      </h2>
+      <div class="examples">
+        <div class="left" v-for="i, index in leftDoc">
+          <demo :expandAll="expandAll" :doc="i"
+                :root="root" :highlight="highlight"
+                :slotName="demoIndex('left', index)">
+            <slot :name="demoIndex('left', index)"
+                  :slot="demoIndex('left', index)"/>
+          </demo>
+        </div>
+        <div class="right" v-for="i, index in rightDoc">
+          <demo :expandAll="expandAll" :doc="i"
+                :root="root" :highlight="highlight"
+                :slotName="demoIndex('right', index)">
+            <slot :name="demoIndex('right', index)"
+                  :slot="demoIndex('right', index)"/>
+          </demo>
+        </div>
       </div>
-      <div class="right" v-for="i, index in rightDoc">
-        <demo :expandAll="expandAll" :doc="i"
-              :root="root" :highlight="highlight"
-              :length="docList.length">
-          <slot :name="demoIndex('right', index)"
-                :slot="demoIndex('right', index)"/>
-        </demo>
-      </div>
+      <div v-html="htmlAfter"></div>
     </div>
-    <div class="content" v-html="htmlAfter"></div>
   </div>
 </template>
 
@@ -33,16 +36,17 @@
   import fetch from 'unfetch'
   import marked from 'marked3'
   import highlight from './utils/highlight'
+  import VLoading from 'vue-cute-loading'
 
   export default {
     name: 'Kokk',
 
     props: {
-      title: {
+      demoTitle: {
         type: String,
         default: 'Examples'
       },
-      titleclassName: {
+      titleClassname: {
         type: String,
         default: ''
       },
@@ -63,10 +67,6 @@
       highlight: {
         type: [Boolean, Function],
         default: true
-      },
-      demoOrder: {
-        type: Number,
-        default: 3
       }
     },
 
@@ -74,7 +74,8 @@
       return {
         expandAll: false,
         html: '',
-        htmlAfter: ''
+        htmlAfter: '',
+        loading: true
       }
     },
 
@@ -98,7 +99,7 @@
       const orginalHeading = renderer.heading.bind(renderer)
       renderer.heading = (text, depth, raw) => {
         if (depth === 1) {
-          text = `<span class="${this.titleclassName}">${text}</span>`
+          text = `<span class="${this.titleClassname}">${text}</span>`
         }
         return orginalHeading(text, depth, raw)
       }
@@ -108,7 +109,7 @@
       renderer.html = html => {
         if (DEMO_START.test(html)) {
           DemoExist++
-          return DEMO_HOLDER + DemoExist
+          return DEMO_HOLDER
         }
         return html
       }
@@ -119,17 +120,19 @@
       })
 
       if (DemoExist) {
-        const RE = new RegExp(`${DEMO_HOLDER}1([\\s\\S]*)`, 'gi')
+        const RE = new RegExp(`${DEMO_HOLDER}([\\s\\S]*)`, 'gi')
         let arr = html.split(RE)
         html = arr[0]
         this.htmlAfter = arr[1]
       }
 
       this.html = html
+      this.loading = false
     },
 
     components: {
-      Demo
+      Demo,
+      VLoading
     },
 
     methods: {
@@ -329,5 +332,28 @@
     height: 1px;
     margin: 25px 0;
     height: 1px;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-top: 30px;
+  }
+  tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+  }
+  th, td {
+    padding: 13px 15px;
+    border: 1px solid #dfe2e5;
+  }
+  th {
+    font-weight: 600;
+  }
+  table tr:nth-child(2n) {
+    background-color: #f6f8fa;
   }
 </style>

@@ -1,7 +1,7 @@
 import { mount } from 'vue-test-utils'
-import DemoShow from './'
+import Kokk from './'
 
 test('it works', () => {
-  const wrapper = mount(DemoShow)
+  const wrapper = mount(Kokk)
   expect(wrapper.isVueInstance()).toBe(true)
 })

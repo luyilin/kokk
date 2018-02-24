@@ -1,4 +1,4 @@
-# kokk 
+# KOKK
 
 [![NPM version](https://img.shields.io/npm/v/kokk.svg?style=flat)](https://npmjs.com/package/kokk) [![NPM downloads](https://img.shields.io/npm/dm/kokk.svg?style=flat)](https://npmjs.com/package/kokk) [![CircleCI](https://circleci.com/gh/luyilin/kokk/tree/master.svg?style=shield)](https://circleci.com/gh/luyilin/kokk/tree/master)
 
@@ -24,64 +24,28 @@ yarn add kokk --save
 
 ## Options
 
-### title
-
-Type: `string`<br>
-Default: `Basic`
-
-The title of the demo.
-
-### desc
-
-Type: `string`<br>
-Default: `Basic`
-
-The description of the demo.
-
-### expandAll
-
-Type: `boolean`<br>
-Default: `false`
-
-Whether to expand code.
-
-### highlight
-
-Type: `boolean` `function`<br>
-Default: `true`
-
-Whether to highlight code blocks, you can supply a function to customize this, use prismjs to highlight code by default. 
-
-```js
-function highlight(code, lang) {}
-```
-
-### root
-
-Type: `string`<br>
-Default: `./`
-
-The path of the markdown file.
-
-### doc
-
-Type: `string`<br>
-Default: `demo.md`
-
-The name of the markdown file.
+| Property | Description | type | Default |
+| -------- | ----------- | ---- | ------- |
+| title-classname | The custom classname of title. The title defaults to the value of h1 title in the index markdown file. | string | '' |
+| demo-title | The title of the demo part. | string | 'Examples' |
+| root | The path of the markdown file. | string | '/docs/' |
+| index-doc | The main markdown file. | string | 'index.md' |
+| doc-list | Array of the example markdown files. | boolean | true |
+| highlight | Whether to highlight code blocks, you can supply a function to customize this, use prismjs to highlight code by default. | boolean / function | true |
 
 ## Slot
 
-The live demo which you want to display, make sure to use `demo` as the slot name.
+The live demo which you want to display, make sure to use `demo-${index}` as the slot name.
+
+Make sure to use the same index as the order of the makedown file in docList.
 
 Here is a simple example:
 
 ```vue
 <template>
   <div id="app">
-    <kokk root="./docs/">
-      <star-rate slot="demo" :value="3"
-                 type="star1"/>
+    <kokk :doc-list="['demo.md']">
+      <star-rate slot="demo-0" :value="4"/>
     </kokk>
   </div>
 </template>

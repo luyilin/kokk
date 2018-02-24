@@ -59,6 +59,7 @@
     "prismjs": "^1.11.0",
     "sass-loader": "^6.0.6",
     "unfetch": "^3.0.0",
+    "vue-cute-loading": "^0.0.1",
     "vue-cute-rate": "^0.0.6",
     "vue-style-loader": "^4.0.2"
   }

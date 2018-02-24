@@ -7884,6 +7884,14 @@ void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
+vue-cute-loading@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/vue-cute-loading/-/vue-cute-loading-0.0.1.tgz#523d89cfee0a2fbb20eb6f0f50a769f8d2d65b0e"
+  dependencies:
+    node-sass "^4.7.2"
+    sass-loader "^6.0.6"
+    vue-style-loader "^4.0.2"
+
 vue-cute-rate@^0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/vue-cute-rate/-/vue-cute-rate-0.0.4.tgz#f9e8243ea1287e6506ceb51f2fe943fc5eb2d126"

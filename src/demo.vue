@@ -1,15 +1,13 @@
 <template>
   <div class="box" :class="{expand: codeExpand}">
     <div class="box-demo">
-      <div v-for="i, index in length">
-        <slot :name="'demo-' + index"/>
-      </div>
+      <slot :name="slotName"/>
     </div>
     <div class="box-meta">
       <div class="box-title">
-        <a>{{ title }}</a>
+        <a>{{ docTitle }}</a>
       </div>
-      <p>{{ desc }}</p>
+      <p>{{ docDesc }}</p>
       <span class="expand-icon btn-hover btn-hover-slide" :data-tip="tip">
         <img alt="expand code" src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg"
              :class="iconShow"
@@ -34,11 +32,11 @@
     props: {
       title: {
         type: String,
-        default: 'Title'
+        default: ''
       },
       desc: {
         type: String,
-        default: 'Desc.'
+        default: ''
       },
       expandAll: {
         type: Boolean,
@@ -56,9 +54,9 @@
         type: String,
         default: 'demo.md'
       },
-      length: {
-        type: Number,
-        default: 0
+      slotName: {
+        type: String,
+        default: 'demo-0'
       }
     },
 
@@ -66,7 +64,9 @@
       return {
         codeExpand: this.expandAll,
         html: '',
-        tip: 'show code'
+        tip: 'show code',
+        docTitle: this.title,
+        docDesc: this.desc
       }
     },
 
@@ -89,10 +89,53 @@
       const content = await fetch(`${this.root}${this.doc}`).then(res => res.text())
       const renderer = new marked.Renderer()
       const highlightFn = typeof this.highlight === 'function' ? this.highlight : highlight
+
+      let titleExist = 0
+      let descExist = 0
+      const TITLE_START = /^<!--\s*title-start\s*-->/
+      const TITLE_STOP = /^<!--\s*title-stop\s*-->/
+      const TITLE_START_HOLDER = '#!!!title-start!!!'
+      const TITLE_STOP_HOLDER = '#!!!title-stop!!!'
+      const DESC_START = /^<!--\s*desc-start\s*-->/
+      const DESC_STOP = /^<!--\s*desc-stop\s*-->/
+      const DESC_START_HOLDER = '#!!!desc-start!!!'
+      const DESC_STOP_HOLDER = '#!!!desc-stop!!!'
+      renderer.html = html => {
+        if (TITLE_START.test(html)) {
+          titleExist++
+          return TITLE_START_HOLDER
+        }
+        if (TITLE_STOP.test(html)) {
+          return TITLE_STOP_HOLDER
+        }
+        if (DESC_START.test(html)) {
+          descExist++
+          return DESC_START_HOLDER
+        }
+        if (DESC_STOP.test(html)) {
+          return DESC_STOP_HOLDER
+        }
+        return html
+      }
+
       let html = marked(content, {
         renderer,
         highlight: this.highlight && highlightFn
       })
+
+      const TAG_RE = new RegExp(`<\\S*>`, 'gi')
+      if (titleExist || descExist) {
+        const TITLE_RE = new RegExp(`${TITLE_START_HOLDER}([\\s\\S]*)${TITLE_STOP_HOLDER}`, 'gi')
+        this.docTitle = (html.match(TITLE_RE))[0].replace(TITLE_START_HOLDER, '').replace(TITLE_STOP_HOLDER, '')
+          .replace(TAG_RE, '').split(':')[1]
+        html = html.replace(TITLE_RE, '')
+      }
+      if (descExist) {
+        const DESC_RE = new RegExp(`${DESC_START_HOLDER}([\\s\\S]*)${DESC_STOP_HOLDER}`, 'gi')
+        this.docDesc = (html.match(DESC_RE))[0].replace(DESC_START_HOLDER, '').replace(DESC_STOP_HOLDER, '')
+          .replace(TAG_RE, '').split(':')[1]
+        html = html.replace(DESC_RE, '')
+      }
       this.html = html
     },
 
@@ -117,17 +160,16 @@
     margin: 0 0 16px;
     transition: all .2s;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #314659;
     .box-demo {
       border-bottom: 1px solid #ebedf0;
       padding: 42px 24px 50px;
-      color: rgba(0, 0, 0, 0.65);
     }
     .box-meta {
       position: relative;
       padding: 18px 32px;
       border-radius: 0 0 2px 2px;
       font-size: 14px;
-      color: #314659;
       line-height: 2;
       .box-title {
         position: absolute;
