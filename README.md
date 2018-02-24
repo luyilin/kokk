@@ -1,4 +1,4 @@
-# kokk 
+# KOKK
 
 [![NPM version](https://img.shields.io/npm/v/kokk.svg?style=flat)](https://npmjs.com/package/kokk) [![NPM downloads](https://img.shields.io/npm/dm/kokk.svg?style=flat)](https://npmjs.com/package/kokk) [![CircleCI](https://circleci.com/gh/luyilin/kokk/tree/master.svg?style=shield)](https://circleci.com/gh/luyilin/kokk/tree/master)
 
@@ -8,7 +8,7 @@ A [examples page](https://vue-cute-rate.netlify.com/example/dist/) which powered
 
 ## Introduction
 
-A beautiful way to display a demo and the usage from markdown.
+Create a beautiful doc for your project.
 
 The design is inspired by [Ant Design](https://ant.design/)! I like the elegant design to display a demo.
 
@@ -22,88 +22,76 @@ yarn add kokk --save
 
 CDN: [UNPKG](https://unpkg.com/kokk/) | [jsDelivr](https://cdn.jsdelivr.net/npm/kokk/) (available as `window.kokk`)
 
-## Usage
+## Quick Start
 
-```vue
-<template>
-  <div id="app">
-    <kokk>
-      <span slot="demo">meow (ฅ>ω<*ฅ)</span>
-    </kokk>
-  </div>
-</template>
+* import Kokk as a component in a .vue file.
 
-<script>
-import kokk from 'kokk'
+* Then mkdir a directory of your markdown files, the path defaults to `/docs/`.
 
-export default {
-  components: {
-    kokk
-  }
-}
-</script>
+* The populate a index.md in the directory, which is your main markdown file. 
+
+* The populate a list of markdown files of your demo usage in the directory. And implement the `doc-list` prop. The order of the prop is the display order.
+
+* The write the live demo as a slot in `<kokk></kokk>`, use `demo-${index}` as the slot name. The index is the same as the order of `doc-list`.
+
+## Guide
+
+### Where demos show
+
+Write `<!-- DEMO -->` on where you want them to be on the index markdown file. Demos will be rendered here.
+
+e.g.
+```
+## Install
+
+<!-- DEMO -->
+
+## Options
+
+```
+
+### Set the demos' custom title and description
+
+You can use following html comment marks in each demo markdown file to set costom title and description of the demo.
+
+```
+<!-- title-start -->
+
+title: Half star
+
+<!-- title-stop -->
+
+<!-- desc-start -->
+
+desc: Support select half star.
+
+<!-- desc-stop -->
 ```
 
 ## Options
 
-### title
-
-Type: `string`<br>
-Default: `Basic`
-
-The title of the demo.
-
-### desc
-
-Type: `string`<br>
-Default: `Basic`
-
-The description of the demo.
-
-### expandAll
-
-Type: `boolean`<br>
-Default: `false`
-
-Whether to expand code.
-
-### highlight
-
-Type: `boolean` `function`<br>
-Default: `true`
-
-Whether to highlight code blocks, you can supply a function to customize this, use prismjs to highlight code by default. 
-
-```js
-function highlight(code, lang) {}
-```
-
-### root
-
-Type: `string`<br>
-Default: `./`
-
-The path of the markdown file.
-
-### doc
-
-Type: `string`<br>
-Default: `demo.md`
-
-The name of the markdown file.
+| Property | Description | type | Default |
+| -------- | ----------- | ---- | ------- |
+| title-classname | The custom classname of title. The title defaults to the value of h1 title in the index markdown file. | string | '' |
+| demo-title | The title of the demo part. | string | 'Examples' |
+| root | The path of the markdown file. | string | '/docs/' |
+| index-doc | The main markdown file. | string | 'index.md' |
+| doc-list | Array of the example markdown files. | boolean | true |
+| highlight | Whether to highlight code blocks, you can supply a function to customize this, use prismjs to highlight code by default. | boolean / function | true |
 
 ## Slot
 
-The live demo which you want to display, make sure to use `demo` as the slot name.
+The live demo which you want to display, make sure to use `demo-${index}` as the slot name.
+
+Make sure to use the same index as the order of the markdown file in docList.
 
 Here is a simple example:
 
 ```vue
 <template>
   <div id="app">
-    <kokk root="./docs/">
-      <star-rate slot="demo" :value="3"
-                 type="star1"/>
+    <kokk :doc-list="['demo.md']">
+      <star-rate slot="demo-0" :value="4"/>
     </kokk>
   </div>
 </template>

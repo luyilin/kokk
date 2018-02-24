@@ -8,7 +8,7 @@ A [examples page](https://vue-cute-rate.netlify.com/example/dist/) which powered
 
 ## Introduction
 
-A beautiful way to display a demo and the usage from markdown.
+Create a beautiful doc for your project.
 
 The design is inspired by [Ant Design](https://ant.design/)! I like the elegant design to display a demo.
 
