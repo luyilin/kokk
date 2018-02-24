@@ -30,14 +30,12 @@ yarn add kokk --save
 | demo-title | The title of the demo part. | string | 'Examples' |
 | root | The path of the markdown file. | string | '/docs/' |
 | index-doc | The main markdown file. | string | 'index.md' |
-| doc-list | Array of the example markdown files. | boolean | true |
+| doc-list | Array of the example markdown files. | array | ['demo.md'] |
 | highlight | Whether to highlight code blocks, you can supply a function to customize this, use prismjs to highlight code by default. | boolean / function | true |
 
 ## Slot
 
-The live demo which you want to display, make sure to use `demo-${index}` as the slot name.
-
-Make sure to use the same index as the order of the makedown file in docList.
+The live demo which you want to display, make sure to use `demo-${index}` as the slot name, and use the same index as the order of the makedown file in docList.
 
 Here is a simple example:
 

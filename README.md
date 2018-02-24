@@ -30,7 +30,7 @@ CDN: [UNPKG](https://unpkg.com/kokk/) | [jsDelivr](https://cdn.jsdelivr.net/npm/
 
 * The populate a index.md in the directory, which is your main markdown file. 
 
-* The populate a list of markdown files of your demo usage in the directory. And implement the `doc-list` prop. The order of the prop is the display order.
+* The populate a list of example markdown files in the directory. And implement the `doc-list` prop. The order of the prop is the display order.
 
 * The write the live demo as a slot in `<kokk></kokk>`, use `demo-${index}` as the slot name. The index is the same as the order of `doc-list`.
 
@@ -50,9 +50,9 @@ e.g.
 
 ```
 
-### Set the demos' custom title and description
+### Set the examples' custom title and description
 
-You can use following html comment marks in each demo markdown file to set costom title and description of the demo.
+You can use following html comment marks in each example markdown file to set costom title and description of it.
 
 ```
 <!-- title-start -->
@@ -76,14 +76,12 @@ desc: Support select half star.
 | demo-title | The title of the demo part. | string | 'Examples' |
 | root | The path of the markdown file. | string | '/docs/' |
 | index-doc | The main markdown file. | string | 'index.md' |
-| doc-list | Array of the example markdown files. | boolean | true |
+| doc-list | Array of the example markdown files. | array | ['demo.md'] |
 | highlight | Whether to highlight code blocks, you can supply a function to customize this, use prismjs to highlight code by default. | boolean / function | true |
 
 ## Slot
 
-The live demo which you want to display, make sure to use `demo-${index}` as the slot name.
-
-Make sure to use the same index as the order of the markdown file in docList.
+The live demo which you want to display, make sure to use `demo-${index}` as the slot name, and use the same index as the order of the makedown file in docList.
 
 Here is a simple example:
 
