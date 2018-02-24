@@ -1,7 +1,9 @@
 <template>
   <div class="box" :class="{expand: codeExpand}">
     <div class="box-demo">
-      <slot name="demo"/>
+      <div v-for="i, index in length">
+        <slot :name="'demo-' + index"/>
+      </div>
     </div>
     <div class="box-meta">
       <div class="box-title">
@@ -27,16 +29,16 @@
   import highlight from './utils/highlight'
 
   export default {
-    name: 'Kokk',
+    name: 'Demo',
 
     props: {
       title: {
         type: String,
-        default: 'Basic'
+        default: 'Title'
       },
       desc: {
         type: String,
-        default: 'The simplest usage.'
+        default: 'Desc.'
       },
       expandAll: {
         type: Boolean,
@@ -48,11 +50,15 @@
       },
       root: {
         type: String,
-        default: './'
+        default: '/docs/'
       },
       doc: {
         type: String,
         default: 'demo.md'
+      },
+      length: {
+        type: Number,
+        default: 0
       }
     },
 
@@ -81,10 +87,13 @@
 
     async created () {
       const content = await fetch(`${this.root}${this.doc}`).then(res => res.text())
+      const renderer = new marked.Renderer()
       const highlightFn = typeof this.highlight === 'function' ? this.highlight : highlight
-      this.html = marked(content, {
-        highlight: this.highlight && highlightFn,
+      let html = marked(content, {
+        renderer,
+        highlight: this.highlight && highlightFn
       })
+      this.html = html
     },
 
     methods: {
@@ -172,6 +181,11 @@
       display: none;
       overflow: auto;
       border-radius: 0 0 2px 2px;
+      pre {
+        margin: 0;
+        border: none;
+        padding: 10px;
+      }
     }
     &.expand .box-meta {
       border-radius: 0;

@@ -1,4 +1,4 @@
-import Kokk from './App.vue'
+import Kokk from './list.vue'
 
 export default Kokk
 
