@@ -116,12 +116,12 @@ Here is a simple example:
 </template>
 
 <script>
-import kokk from '../src'
+import Kokk from 'kokk'
 import StarRate from 'vue-cute-rate'
 
 export default {
   components: {
-    kokk,
+    Kokk,
     StarRate
   }
 }
