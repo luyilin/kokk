@@ -10,7 +10,7 @@ A [examples page](https://vue-cute-rate.netlify.com/example/dist/) which powered
 
 KOKK is a component for Vue.js that fetches a list of Markdown files and renders them as a beautiful one-page documentation.
 
-The design is inspired by [Ant Design](https://ant.design/)! I like the elegant design to display a list of examples.
+The design is inspired by [Ant Design](https://ant.design/components/rate/)! I like the elegant design to display a list of examples.
 
 The name is inspired by *Kokkoku* 💃
 
