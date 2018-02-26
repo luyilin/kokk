@@ -124,7 +124,7 @@
       })
 
       const TAG_RE = new RegExp(`<\\S*>`, 'gi')
-      if (titleExist || descExist) {
+      if (titleExist) {
         const TITLE_RE = new RegExp(`${TITLE_START_HOLDER}([\\s\\S]*)${TITLE_STOP_HOLDER}`, 'gi')
         this.docTitle = (html.match(TITLE_RE))[0].replace(TITLE_START_HOLDER, '').replace(TITLE_STOP_HOLDER, '')
           .replace(TAG_RE, '').split(':')[1]

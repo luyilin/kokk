@@ -58,8 +58,10 @@
     "node-sass": "^4.7.2",
     "prismjs": "^1.11.0",
     "sass-loader": "^6.0.6",
+    "slugo": "^0.2.1",
     "unfetch": "^3.0.0",
-    "vue-cute-loading": "^0.0.1",
+    "vue-affix": "^0.2.4",
+    "vue-cute-loading": "^0.0.2",
     "vue-cute-rate": "^0.0.6",
     "vue-style-loader": "^4.0.2"
   }

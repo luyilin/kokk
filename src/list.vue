@@ -1,32 +1,45 @@
 <template>
   <div class="main">
-    <v-loading v-if="loading" color="#7175b1"></v-loading>
-    <div class="content" v-else>
-      <div v-html="html"></div>
-      <h2 class="demo-title">
-        {{ demoTitle }}
-        <svg @click="expandAll = !expandAll"
-             t="1519462199298" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2155" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><path d="M411.485726 111.200056H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 111.200056H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM411.485726 554.844281H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 554.844281H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032z" fill="#515151" p-id="2156"></path></svg>
-      </h2>
-      <div class="examples">
-        <div class="left" v-for="i, index in leftDoc">
-          <demo :expandAll="expandAll" :doc="i"
-                :root="root" :highlight="highlight"
-                :slotName="demoIndex('left', index)">
-            <slot :name="demoIndex('left', index)"
-                  :slot="demoIndex('left', index)"/>
-          </demo>
+    <loading v-if="loading" color="#7175b1"/>
+    <div id="container" v-else>
+      <affix class="affix" relative-element-selector="#container" :offset="{ top: 30, bottom: 30}" style="right: 30px; width: 110px;">
+        <ul class="menu">
+          <li
+            class="item"
+            :class="{active: isActive(item.slug)}"
+            :key="item.slug"
+            v-for="item in menu">
+            <a :href="`#${item.slug}`">{{ item.title }}</a>
+          </li>
+        </ul>
+      </affix>
+      <div class="content">
+        <div v-html="html"></div>
+        <h2 class="demo-title">
+          {{ demoTitle }}
+          <svg @click="expandAll = !expandAll"
+               t="1519462199298" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2155" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><path d="M411.485726 111.200056H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 111.200056H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM411.485726 554.844281H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 554.844281H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032z" fill="#515151" p-id="2156"></path></svg>
+        </h2>
+        <div class="examples">
+          <div class="left" v-for="i, index in leftDoc">
+            <demo :expandAll="expandAll" :doc="i"
+                  :root="root" :highlight="highlight"
+                  :slotName="demoIndex('left', index)">
+              <slot :name="demoIndex('left', index)"
+                    :slot="demoIndex('left', index)"/>
+            </demo>
+          </div>
+          <div class="right" v-for="i, index in rightDoc">
+            <demo :expandAll="expandAll" :doc="i"
+                  :root="root" :highlight="highlight"
+                  :slotName="demoIndex('right', index)">
+              <slot :name="demoIndex('right', index)"
+                    :slot="demoIndex('right', index)"/>
+            </demo>
+          </div>
         </div>
-        <div class="right" v-for="i, index in rightDoc">
-          <demo :expandAll="expandAll" :doc="i"
-                :root="root" :highlight="highlight"
-                :slotName="demoIndex('right', index)">
-            <slot :name="demoIndex('right', index)"
-                  :slot="demoIndex('right', index)"/>
-          </demo>
-        </div>
+        <div v-html="htmlAfter"></div>
       </div>
-      <div v-html="htmlAfter"></div>
     </div>
   </div>
 </template>
@@ -36,7 +49,11 @@
   import fetch from 'unfetch'
   import marked from 'marked3'
   import highlight from './utils/highlight'
-  import VLoading from 'vue-cute-loading'
+  import Loading from 'vue-cute-loading'
+  import slugo from 'slugo'
+  import Vue from 'vue'
+  import Affix from 'vue-affix'
+  Vue.use(Affix)
 
   export default {
     name: 'Kokk',
@@ -75,7 +92,9 @@
         expandAll: false,
         html: '',
         htmlAfter: '',
-        loading: true
+        loading: true,
+        menu: [],
+        hash: ''
       }
     },
 
@@ -97,9 +116,17 @@
       const highlightFn = typeof this.highlight === 'function' ? this.highlight : highlight
       const renderer = new marked.Renderer()
       const orginalHeading = renderer.heading.bind(renderer)
+      const menu = []
       renderer.heading = (text, depth, raw) => {
-        if (depth === 1) {
+        if (depth === 1 && this.titleClassname) {
           text = `<span class="${this.titleClassname}">${text}</span>`
+        }
+        const slug = slugo(raw)
+        if (depth === 2) {
+          menu.push({
+            title: text,
+            slug
+          })
         }
         return orginalHeading(text, depth, raw)
       }
@@ -127,17 +154,33 @@
       }
 
       this.html = html
+      this.menu = menu
       this.loading = false
+    },
+
+    mounted() {
+      this.handleHashChange()
+      window.addEventListener('hashchange', this.handleHashChange)
+    },
+
+    beforeDestroy() {
+      window.removeEventListener('hashchange', this.handleHashChange)
     },
 
     components: {
       Demo,
-      VLoading
+      Loading
     },
 
     methods: {
       demoIndex (i, index) {
         return 'demo-' + (i === 'left' ? 2 * index : 2 * index + 1)
+      },
+      isActive(slug) {
+        return slug === this.hash.slice(1)
+      },
+      handleHashChange() {
+        this.hash = location.hash
       }
     }
   }
@@ -182,10 +225,52 @@
     width: 72%;
     margin: 10px auto;
     padding-bottom: 60px;
+    margin-right: 140px;
     @media only screen and (max-width: 768px) {
       width: 100%;
       padding: 0 25px;
       box-sizing: border-box;
+      & .affix {
+        display: none;
+      }
+    }
+    .content {
+      padding-right: 50px;
+    }
+    .affix {
+      .menu {
+        font-size: 12px;
+        margin: 16px 0;
+        padding-left: 0;
+        border-left: 1px solid #ebedf0;
+        list-style: none;
+        & > .item:not(:last-child) {
+          margin-bottom: 4px;
+        }
+        .item {
+          margin: 0;
+          & a {
+            padding-left: 16px;
+            display: block;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #314659;
+            width: 110px;
+            border-left: 1px solid transparent;
+            margin-left: -1px;
+            border-bottom: none;
+            cursor: pointer;
+            padding-bottom: 0;
+            line-height: 2;
+          }
+          &.active a {
+            color: var(--blue);
+            border-color: var(--blue)
+          }
+        }
+      }
     }
     .demo-title {
       margin-bottom: 65px;
