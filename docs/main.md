@@ -38,7 +38,7 @@ CDN: [UNPKG](https://unpkg.com/kokk/) | [jsDelivr](https://cdn.jsdelivr.net/npm/
 
 ### What are example docs
 
-Example docs is a list of markdown files that contain the code blocks of the examples' usage. We render the code blocks in the example part of the doc. For example:
+Example docs are a list of markdown files that contain the code blocks of the examples' usage. We render the code blocks in the example part of the doc. For example:
 
 ```vue
 <template>

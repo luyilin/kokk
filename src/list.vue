@@ -62,7 +62,7 @@
       },
       indexDoc: {
         type: String,
-        default: 'index.md'
+        default: 'main.md'
       },
       highlight: {
         type: [Boolean, Function],
