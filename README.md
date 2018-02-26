@@ -6,7 +6,7 @@
 
 [Github](https://github.com/luyilin/kokk)
 
-A [examples page](https://vue-cute-rate.netlify.com/example/dist/) which powered by kokk.
+A [documentation](https://vue-cute-rate.netlify.com/example/dist/) which powered by kokk.
 
 ## Introduction
 
@@ -32,7 +32,7 @@ CDN: [UNPKG](https://unpkg.com/kokk/) | [jsDelivr](https://cdn.jsdelivr.net/npm/
 
 * Then populate a main.md in the directory, which is your main markdown file.
 
-* Then populate a list of example markdown files in the directory. And implement the `doc-list` prop. The order of the prop is the display order.
+* Then populate a list of example markdown files in the directory. And implement the `doc-list` prop. The order of the prop is the display order. And set the order to `example-order` to implement the menu.
 
 * Then write the live demo as a slot in `<kokk></kokk>`, use `demo-${index}` as the slot name, `index` is the order of the doc in `doc-list`.
 
@@ -97,6 +97,7 @@ desc: Support select half star.
 | -------- | ----------- | ---- | ------- |
 | title-classname | The custom classname of title. The title defaults to the value of h1 title in the main markdown file. | string | - |
 | example-title | The title of the example part. | string | Examples |
+| example-order | The order of the example part in the documentation, set this to implement the menu. | number | 3 |
 | root | The path of the markdown file. | string | /docs/ |
 | main-doc | The main markdown file. | string | main.md |
 | doc-list | Array of the example markdown files. | array | ['demo.md'] |

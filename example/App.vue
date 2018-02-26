@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <kokk root="/docs/" :doc-list="['basic.md', 'demo.md']"
-          title-classname="title">
+          title-classname="title"
+          :example-order="4">
       <star-rate slot="demo-0" :value="4"/>
       <star-rate slot="demo-1" :value="3"
                  type="star1"/>

@@ -15,8 +15,8 @@
       </affix>
       <div class="content">
         <div v-html="html"></div>
-        <h2 class="demo-title">
-          {{ demoTitle }}
+        <h2 class="demo-title" :id="exampleSlug">
+          {{ exampleTitle }}
           <svg @click="expandAll = !expandAll"
                t="1519462199298" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2155" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><path d="M411.485726 111.200056H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 111.200056H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM411.485726 554.844281H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 554.844281H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032z" fill="#515151" p-id="2156"></path></svg>
         </h2>
@@ -59,9 +59,13 @@
     name: 'Kokk',
 
     props: {
-      demoTitle: {
+      exampleTitle: {
         type: String,
         default: 'Examples'
+      },
+      exampleOrder: {
+        type: Number,
+        default: 3
       },
       titleClassname: {
         type: String,
@@ -77,7 +81,7 @@
           return ['demo.md']
         }
       },
-      indexDoc: {
+      mainDoc: {
         type: String,
         default: 'main.md'
       },
@@ -108,15 +112,30 @@
         return this.docList.filter((i, index) => {
           if (index % 2 !== 0) return i
         })
+      },
+      exampleSlug () {
+        return slugo(this.exampleTitle)
       }
     },
 
     async created () {
-      const content = await fetch(`${this.root}${this.indexDoc}`).then(res => res.text())
+      const content = await fetch(`${this.root}${this.mainDoc}`).then(res => res.text())
       const highlightFn = typeof this.highlight === 'function' ? this.highlight : highlight
       const renderer = new marked.Renderer()
       const orginalHeading = renderer.heading.bind(renderer)
       const menu = []
+
+      let DemoExist = 0
+      const DEMO_START = /^<!--\s*DEMO\s*-->/
+      const DEMO_HOLDER = '## DEMO-start'
+      renderer.html = html => {
+        if (DEMO_START.test(html)) {
+          DemoExist++
+          return DEMO_HOLDER
+        }
+        return html
+      }
+
       renderer.heading = (text, depth, raw) => {
         if (depth === 1 && this.titleClassname) {
           text = `<span class="${this.titleClassname}">${text}</span>`
@@ -129,16 +148,6 @@
           })
         }
         return orginalHeading(text, depth, raw)
-      }
-      let DemoExist = 0
-      const DEMO_START = /^<!--\s*DEMO\s*-->/
-      const DEMO_HOLDER = '#!!!DEMO-start!!!'
-      renderer.html = html => {
-        if (DEMO_START.test(html)) {
-          DemoExist++
-          return DEMO_HOLDER
-        }
-        return html
       }
 
       let html = marked(content, {
@@ -154,6 +163,10 @@
       }
 
       this.html = html
+      menu.splice(this.exampleOrder, 0, {
+        title: this.exampleTitle,
+        slug: slugo(this.exampleTitle)
+      })
       this.menu = menu
       this.loading = false
     },
