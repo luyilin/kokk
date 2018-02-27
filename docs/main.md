@@ -102,6 +102,7 @@ desc: Support select half star.
 | main-doc | The main markdown file. | string | main.md |
 | doc-list | Array of the example markdown files. | array | ['demo.md'] |
 | highlight | Whether to highlight code blocks, you can supply a function to customize this, use prismjs to highlight code by default. | boolean / function | true |
+| loading-color | The color of the loading component. | string | #7175b1 |
 
 ## Slot
 

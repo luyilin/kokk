@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <loading v-if="loading" color="#7175b1"/>
+    <loading v-if="loading" :color="loadingColor"/>
     <div id="container" v-else>
       <affix class="affix" relative-element-selector="#container" :offset="{ top: 30, bottom: 30}" style="right: 30px; width: 110px;">
         <ul class="menu">
@@ -92,6 +92,10 @@
       highlight: {
         type: [Boolean, Function],
         default: true
+      },
+      loadingColor: {
+        type: String,
+        default: '#7175b1'
       }
     },
 
