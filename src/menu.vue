@@ -12,21 +12,16 @@
 
 <script>
 export default {
-  props: ['menu'],
+  props: {
+    menu: {
+      type: Array,
+      default: () => []
+    }
+  },
 
   data() {
     return {
       hash: ''
-    }
-  },
-
-  methods: {
-    isActive(slug) {
-      return slug === this.hash.slice(1)
-    },
-
-    handleHashChange() {
-      this.hash = location.hash
     }
   },
 
@@ -37,6 +32,16 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener('hashchange', this.handleHashChange)
+  },
+
+  methods: {
+    isActive(slug) {
+      return slug === this.hash.slice(1)
+    },
+
+    handleHashChange() {
+      this.hash = location.hash
+    }
   }
 }
 </script>
