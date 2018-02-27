@@ -254,6 +254,9 @@
       & .affix {
         display: none;
       }
+      & .content {
+        padding-right: 0 !important;
+      }
     }
     .content {
       padding-right: 50px;
