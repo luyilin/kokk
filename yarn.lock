@@ -7884,10 +7884,6 @@ void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
-vue-affix@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/vue-affix/-/vue-affix-0.2.4.tgz#4f599f10517cab95a2d628029f91edb83316afe7"
-
 vue-cute-loading@^0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/vue-cute-loading/-/vue-cute-loading-0.0.2.tgz#950f45df187ea6fcdbbbfcc132a2cd044f9a510e"
