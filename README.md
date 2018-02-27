@@ -6,7 +6,7 @@
 
 [Github](https://github.com/luyilin/kokk)
 
-A [documentation](https://vue-cute-rate.netlify.com/example/dist/) which powered by kokk.
+A [documentation](https://vue-cute-rate.netlify.com/example/dist/) for vue-cute-rate which powered by kokk.
 
 ## Introduction
 
