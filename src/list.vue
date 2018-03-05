@@ -48,6 +48,7 @@ import highlight from './utils/highlight'
 import Loading from 'vue-cute-loading'
 import slugo from 'slugo'
 import DocMenu from './menu.vue'
+import anchorIcon from '!raw-loader!./svg/anchor.svg'
 
 export default {
   name: 'Kokk',
@@ -143,6 +144,7 @@ export default {
           slug
         })
       }
+      text = `<a class="Anchor" href="#${slug}">${anchorIcon}</a>${text}`
       return orginalHeading(text, depth, raw)
     }
 
@@ -415,5 +417,30 @@ th {
 }
 table tr:nth-child(2n) {
   background-color: #f6f8fa;
+}
+.Anchor {
+  position: relative;
+  margin-left: -14px;
+  opacity: 0.35;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  visibility: hidden;
+}
+
+.Anchor:hover {
+  opacity: 1;
+}
+
+.Anchor svg {
+  position: absolute;
+  right: 5px;
+  top: 0;
+}
+
+h2:hover .Anchor,
+h3:hover .Anchor,
+h4:hover .Anchor {
+  visibility: visible;
 }
 </style>

@@ -54,9 +54,11 @@
     "vue-test-utils": "^1.0.0-beta.9"
   },
   "dependencies": {
+    "dom-scroll-into-view": "^1.2.1",
     "marked3": "^0.5.2",
     "node-sass": "^4.7.2",
     "prismjs": "^1.11.0",
+    "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.6",
     "slugo": "^0.2.1",
     "unfetch": "^3.0.0",
