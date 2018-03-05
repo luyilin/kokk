@@ -5,7 +5,7 @@
       <div class="affix">
         <doc-menu :menu="menu"/>
       </div>
-      <div class="content">
+      <div class="content" ref="content">
         <div v-html="html"></div>
         <h2 class="demo-title" :id="exampleSlug">
           <span v-html="exampleTitleWrap"></span>
