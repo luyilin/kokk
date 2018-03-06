@@ -3,7 +3,7 @@
     <loading v-if="loading" :color="loadingColor"/>
     <div v-else>
       <div class="affix">
-        <doc-menu :menu="menu"/>
+        <doc-menu :menu="menu" :activeTitle="activeTitle" @toggleJump="toggleJump"/>
       </div>
       <div class="content" ref="content">
         <div v-html="html"></div>
@@ -49,6 +49,8 @@ import Loading from 'vue-cute-loading'
 import slugo from 'slugo'
 import DocMenu from './menu.vue'
 import anchorIcon from '!raw-loader!./svg/anchor.svg'
+import { findMax, findMin } from './utils'
+import throttle from 'throttleit'
 
 export default {
   name: 'Kokk',
@@ -95,7 +97,9 @@ export default {
       htmlAfter: '',
       loading: true,
       menu: [],
-      hash: ''
+      hash: '',
+      activeTitle: '',
+      jumping: false
     }
   },
 
@@ -172,6 +176,10 @@ export default {
     this.loading = false
   },
 
+  mounted () {
+    this.scrollSpy()
+  },
+
   components: {
     Demo,
     Loading,
@@ -182,11 +190,37 @@ export default {
     demoIndex (i, index) {
       return 'demo-' + (i === 'left' ? 2 * index : 2 * index + 1)
     },
-    isActive(slug) {
-      return slug === this.hash.slice(1)
+    scrollSpy() {
+      const handleScroll = () => {
+        const headings = document.querySelectorAll('h2')
+        if (this.jumping || headings.length === 0) {
+          return
+        }
+        const els = [...headings].map(heading => {
+          return {
+            top: heading.getBoundingClientRect().top,
+            id: heading.id
+          }
+        })
+        const lastNegative = findMax(els.filter(el => el.top < 0), 'top')[0]
+        const firstPositive = findMin(els.filter(el => el.top > 0), 'top')[0]
+
+        let el = {}
+        if (lastNegative && firstPositive && firstPositive.top > 100) {
+          el = lastNegative
+        } else if (firstPositive) {
+          el = firstPositive
+        } else {
+          el = els[els.length - 1]
+        }
+        if (el.id) {
+          this.activeTitle = el.id
+        }
+      }
+      document.addEventListener('scroll', throttle(handleScroll, 300))
     },
-    handleHashChange() {
-      this.hash = location.hash
+    toggleJump (i) {
+      this.jumping = i
     }
   }
 }

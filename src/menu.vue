@@ -5,27 +5,40 @@
       :class="{active: isActive(item.slug)}"
       :key="item.slug"
       v-for="item in menu">
-      <a :href="`#${item.slug}`">{{ item.title }}</a>
+      <a :href="`#${item.slug}`" @click="jumpTo(item.slug)">{{ item.title }}</a>
     </li>
   </ul>
 </template>
 
 <script>
+import jump from 'jump.js'
+
 export default {
   props: {
     menu: {
       type: Array,
       default: () => []
+    },
+    activeTitle: {
+      type: String,
+      default: ''
     }
   },
 
   data() {
     return {
-      hash: ''
+      hash: '',
+      active: this.activeTitle
     }
   },
 
-  mounted() {
+  watch: {
+    activeTitle: function (i) {
+      this.active = i
+    }
+  },
+
+  mounted () {
     this.handleHashChange()
     window.addEventListener('hashchange', this.handleHashChange)
   },
@@ -36,11 +49,29 @@ export default {
 
   methods: {
     isActive(slug) {
-      return slug === this.hash.slice(1)
+      return slug === this.active
     },
 
     handleHashChange() {
-      this.hash = location.hash
+      let hash = location.hash.slice(1)
+      if (hash) {
+        this.jumpTo(hash)
+        // it cannot jump to where he shoud be at the beginning, the reason may be triggering scroll event after jump
+        // debug this for hours but have no idea what to do
+      }
+    },
+
+    jumpTo(id) {
+      this.active = id
+      this.$emit('toggleJump', true)
+      jump(`#${id}`, {
+        duration: 0,
+        callback: () =>
+          setTimeout(() => {
+            this.$emit('toggleJump', false)
+          }, 400)
+        }
+      )
     }
   }
 }

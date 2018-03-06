@@ -25,8 +25,6 @@
 import fetch from 'unfetch'
 import marked from 'marked3'
 import highlight from './utils/highlight'
-import { findMax, findMin } from './utils'
-import throttle from 'throttleit'
 
 export default {
   name: 'Demo',
@@ -143,44 +141,10 @@ export default {
     this.html = html
   },
 
-  mounted () {
-    this.scrollSpy()
-  },
-
   methods: {
     handleCodeExpand () {
       this.codeExpand = !this.codeExpand
       this.tip = this.tip === 'show code' ? 'hide code' : 'show code'
-    },
-    scrollSpy() {
-      const handleScroll = () => {
-        const headings = document.querySelectorAll('h2')
-        if (headings.length === 0) {
-          return
-        }
-        const els = [...headings].map(heading => {
-          return {
-            top: heading.getBoundingClientRect().top,
-            id: heading.id
-          }
-        })
-        const lastNegative = findMax(els.filter(el => el.top < 0), 'top')[0]
-        const firstPositive = findMin(els.filter(el => el.top > 0), 'top')[0]
-
-        let el = {}
-        if (lastNegative && firstPositive && firstPositive.top > 100) {
-          el = lastNegative
-        } else if (firstPositive) {
-          el = firstPositive
-        } else {
-          el = els[els.length - 1]
-        }
-        if (el.id) {
-          console.log(el.id)
-        }
-      }
-
-      document.addEventListener('scroll', throttle(handleScroll, 300))
     }
   }
 }
