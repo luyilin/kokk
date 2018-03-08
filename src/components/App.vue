@@ -12,28 +12,8 @@
           <svg @click="expandAll = !expandAll"
                t="1519462199298" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2155" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><path d="M411.485726 111.200056H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 111.200056H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM411.485726 554.844281H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 554.844281H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032z" fill="#515151" p-id="2156"></path></svg>
         </h2>
-        <div class="examples">
-          <div class="left">
-            <demo v-for="i, index in leftDoc"
-                  :key="index"
-                  :expandAll="expandAll" :doc="i"
-                  :root="root" :highlight="highlight"
-                  :slotName="demoIndex('left', index)">
-              <slot :name="demoIndex('left', index)"
-                    :slot="demoIndex('left', index)"/>
-            </demo>
-          </div>
-          <div class="right">
-            <demo v-for="i, index in rightDoc"
-                  :key="index"
-                  :expandAll="expandAll" :doc="i"
-                  :root="root" :highlight="highlight"
-                  :slotName="demoIndex('right', index)">
-              <slot :name="demoIndex('right', index)"
-                    :slot="demoIndex('right', index)"/>
-            </demo>
-          </div>
-        </div>
+        <component
+          :is="exampleComponent" :expandAll="expandAll"/>
         <div v-html="htmlAfter"></div>
       </div>
     </div>
@@ -41,56 +21,22 @@
 </template>
 
 <script>
-import Demo from './demo.vue'
 import fetch from 'unfetch'
 import marked from 'marked3'
-import highlight from './utils/highlight'
+import highlight from '../utils/highlight'
 import Loading from 'vue-cute-loading'
 import slugo from 'slugo'
-import DocMenu from './menu.vue'
-import anchorIcon from '!raw-loader!./svg/anchor.svg'
-import { findMax, findMin } from './utils'
+import DocMenu from './Menu.vue'
+import anchorIcon from '!raw-loader!../svg/anchor.svg'
+import { findMax, findMin } from '../utils/index'
 import throttle from 'throttleit'
 
 export default {
   name: 'Kokk',
-
-  props: {
-    exampleTitle: {
-      type: String,
-      default: 'Examples'
-    },
-    exampleOrder: {
-      type: Number,
-      default: 3
-    },
-    titleClassname: {
-      type: String,
-      default: ''
-    },
-    root: {
-      type: String,
-      default: '/docs/'
-    },
-    docList: {
-      type: Array,
-      default: () => ['demo.md']
-    },
-    mainDoc: {
-      type: String,
-      default: 'main.md'
-    },
-    highlight: {
-      type: [Boolean, Function],
-      default: true
-    },
-    loadingColor: {
-      type: String,
-      default: '#7175b1'
-    }
-  },
-
+  props: ['config', 'component'],
   data () {
+    let {titleClassname, root, mainDoc, loadingColor} = this.config
+    let {title, order, component} = this.component
     return {
       expandAll: false,
       html: '',
@@ -99,21 +45,18 @@ export default {
       menu: [],
       hash: '',
       activeTitle: '',
-      jumping: false
+      jumping: false,
+      titleClassname: titleClassname,
+      root: root,
+      mainDoc: mainDoc,
+      loadingColor: loadingColor,
+      exampleTitle: title,
+      exampleOrder: order,
+      exampleComponent: component
     }
   },
 
   computed: {
-    leftDoc () {
-      return this.docList.filter((i, index) => {
-        if (index % 2 === 0) return i
-      })
-    },
-    rightDoc () {
-      return this.docList.filter((i, index) => {
-        if (index % 2 !== 0) return i
-      })
-    },
     exampleSlug () {
       return slugo(this.exampleTitle)
     },
@@ -181,15 +124,11 @@ export default {
   },
 
   components: {
-    Demo,
     Loading,
     DocMenu
   },
 
   methods: {
-    demoIndex (i, index) {
-      return 'demo-' + (i === 'left' ? 2 * index : 2 * index + 1)
-    },
     scrollSpy() {
       const handleScroll = () => {
         const headings = document.querySelectorAll('h2')
@@ -295,27 +234,14 @@ body {
       cursor: pointer;
     }
   }
-  .examples {
-    margin: 0 -8px;
-    display: inline-block;
-    width: 100%;
-    .left, .right {
-      width: 50%;
-      display: inline-block;
-      float: left;
-      padding: 0 8px;
-      box-sizing: border-box;
-      @media only screen and (max-width: 768px) {
-        float: none;
-        width: 100%;
-      }
-    }
-  }
 }
 
 h1 {
-  font-size: 52px;
   line-height: 2;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 68px;
+  font-weight: 100;
+  letter-spacing: 3px;
 }
 
 h2, h3, h4 {
