@@ -57,7 +57,7 @@
     "jump.js": "^1.0.2",
     "marked3": "^0.5.2",
     "node-sass": "^4.7.2",
-    "prismjs": "^1.11.0",
+    "prismjs": "^1.12.0",
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.6",
     "slugo": "^0.2.1",

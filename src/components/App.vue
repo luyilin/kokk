@@ -7,13 +7,16 @@
       </div>
       <div class="content" ref="content">
         <div v-html="html"></div>
-        <h2 class="demo-title" :id="exampleSlug">
+        <h2 class="demo-title" :id="exampleSlug"
+            v-if="addComponent">
           <span v-html="exampleTitleWrap"></span>
           <svg @click="expandAll = !expandAll"
                t="1519462199298" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2155" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><path d="M411.485726 111.200056H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 111.200056H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM411.485726 554.844281H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 554.844281H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032z" fill="#515151" p-id="2156"></path></svg>
         </h2>
         <component
-          :is="exampleComponent" :expandAll="expandAll"/>
+          :is="exampleComponent"
+          :expandAll="expandAll"
+          v-if="addComponent"/>
         <div v-html="htmlAfter"></div>
       </div>
     </div>
@@ -36,7 +39,7 @@ export default {
   props: ['config', 'component'],
   data () {
     let {titleClassname, root, mainDoc, loadingColor} = this.config
-    let {title, order, component} = this.component
+    let {addComponent, title, order, component} = this.component
     return {
       expandAll: false,
       html: '',
@@ -49,6 +52,7 @@ export default {
       titleClassname: titleClassname,
       root: root,
       mainDoc: mainDoc,
+      addComponent: addComponent,
       loadingColor: loadingColor,
       exampleTitle: title,
       exampleOrder: order,
@@ -71,6 +75,7 @@ export default {
     const renderer = new marked.Renderer()
     const orginalHeading = renderer.heading.bind(renderer)
     const menu = []
+    let addComponent = this.addComponent
 
     let DemoExist = 0
     const DEMO_START = /^<!--\s*DEMO\s*-->/
@@ -105,16 +110,24 @@ export default {
 
     if (DemoExist) {
       const RE = new RegExp(`${DEMO_HOLDER}([\\s\\S]*)`, 'gi')
-      let arr = html.split(RE)
-      html = arr[0]
-      this.htmlAfter = arr[1]
+      if (addComponent) {
+        let arr = html.split(RE)
+        html = arr[0]
+        this.htmlAfter = arr[1]
+
+        menu.splice(this.exampleOrder, 0, {
+          title: this.exampleTitle,
+          slug: slugo(this.exampleTitle)
+        })
+      } else {
+//        let arr = html.split(RE)
+//        console.log(arr)
+        html = html.replace(RE, '')
+//        console.log(html)
+      }
     }
 
     this.html = html
-    menu.splice(this.exampleOrder, 0, {
-      title: this.exampleTitle,
-      slug: slugo(this.exampleTitle)
-    })
     this.menu = menu
     this.loading = false
   },

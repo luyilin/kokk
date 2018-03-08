@@ -12,15 +12,17 @@ class Kokk {
       loadingColor: '#7175b1',
       ...config
     }
-  }
-  addComponent(i){
     this.component = {
+      addComponent: false,
       title: 'Examples',
       order: 3,
-      component: () => {},
-      ...i
+      component: () => {}
     }
-    return this
+  }
+  addComponent(i) {
+    this.component = Object.assign({}, this.component, i, {
+      addComponent: true
+    })
   }
 
   start(el) {
