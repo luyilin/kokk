@@ -1,7 +1,7 @@
 {
   "name": "kokk",
-  "version": "0.0.19",
-  "description": "A beautiful way to display a demo and the usage from markdown.",
+  "version": "0.0.20",
+  "description": "A beautiful way to create a documentation from markdown.",
   "repository": {
     "url": "luyilin/kokk",
     "type": "git"
