@@ -5,7 +5,7 @@ class Kokk {
   constructor(config) {
     this.config = {
       titleClassname: '',
-      root: '/docs/',
+      root: './',
       mainDoc: 'README.md',
       highlight: true,
       loadingColor: '#7175b1',

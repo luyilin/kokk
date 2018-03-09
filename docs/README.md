@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/kokk.svg?style=flat)](https://npmjs.com/package/kokk) [![NPM downloads](https://img.shields.io/npm/dm/kokk.svg?style=flat)](https://npmjs.com/package/kokk) 
 
-[DEMO](https://kokk.netlify.com/example/dist/)
+[DEMO](https://luyilin.github.io/kokk/)
 
 [Github](https://github.com/luyilin/kokk)
 

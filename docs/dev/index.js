@@ -1,6 +1,7 @@
 import Kokk from '../../src'
 
 const doc = new Kokk({
+  root: '/docs/',
   titleClassname: 'title'
 })
 
