@@ -8,7 +8,6 @@ class Kokk {
       root: './',
       mainDoc: 'main.md',
       highlight: true,
-      highlightFirstParagraph: false,
       loadingColor: '#7175b1',
       ...config
     }

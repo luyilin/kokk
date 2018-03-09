@@ -18,7 +18,7 @@ The name is inspired by *Kokkoku* 💃
 
 ## Install
 
-```bash
+```
 yarn add kokk --save
 ```
 
@@ -42,7 +42,7 @@ CDN: [UNPKG](https://unpkg.com/kokk/) | [jsDelivr](https://cdn.jsdelivr.net/npm/
 
 Example docs are a list of markdown files that contain the code blocks of the examples' usage. We render the code blocks in the example part of the doc. For example:
 
-```vue
+```
 <template>
   <star-rate :value="4"/>
 </template>
@@ -110,7 +110,7 @@ The live demo which you want to display, make sure to use `demo-${index}` as the
 
 Here is a simple example:
 
-```vue
+```
 <template>
   <div id="app">
     <kokk :doc-list="['demo.md']">

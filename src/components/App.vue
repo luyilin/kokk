@@ -38,7 +38,7 @@ export default {
   name: 'Kokk',
   props: ['config', 'component'],
   data () {
-    let {titleClassname, root, mainDoc, loadingColor} = this.config
+    let {titleClassname, root, mainDoc, highlight, loadingColor} = this.config
     let {addComponent, title, order, component} = this.component
     return {
       expandAll: false,
@@ -52,6 +52,7 @@ export default {
       titleClassname: titleClassname,
       root: root,
       mainDoc: mainDoc,
+      highlight: highlight,
       addComponent: addComponent,
       loadingColor: loadingColor,
       exampleTitle: title,
@@ -109,7 +110,7 @@ export default {
     })
 
     if (DemoExist) {
-      const RE = new RegExp(`${DEMO_HOLDER}([\\s\\S]*)`, 'gi')
+      const RE = new RegExp(`${DEMO_HOLDER}`, 'gi')
       if (addComponent) {
         let arr = html.split(RE)
         html = arr[0]
@@ -120,10 +121,7 @@ export default {
           slug: slugo(this.exampleTitle)
         })
       } else {
-//        let arr = html.split(RE)
-//        console.log(arr)
         html = html.replace(RE, '')
-//        console.log(html)
       }
     }
 
