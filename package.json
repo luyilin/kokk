@@ -1,6 +1,6 @@
 {
   "name": "kokk",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "A beautiful way to display a demo and the usage from markdown.",
   "repository": {
     "url": "luyilin/kokk",
@@ -14,21 +14,14 @@
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext .js --ext .vue",
     "test": "npm run lint && npm run build",
-    "build": "poi build --component kokk",
-    "example": "poi -c example/poi.config.js",
-    "build:example": "poi build -c example/poi.config.js",
-    "dev": "poi -c docs/dev/poi.config.js"
+    "build": "poi build --component Kokk",
+    "example": "poi -c docs/dev/poi.config.js"
   },
   "author": {
     "name": "luyilin",
     "email": "luyilin12@gmail.com"
   },
   "license": "MIT",
-  "poi": {
-    "entry": "example/index.js",
-    "dist": "example/dist",
-    "homepage": "./"
-  },
   "eslintConfig": {
     "extends": [
       "plugin:vue/recommended"
