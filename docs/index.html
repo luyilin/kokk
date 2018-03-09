@@ -5,19 +5,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
   <title>Kokk</title>
+  <style>
+    .title {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 68px;
+      font-weight: 100;
+      color: #7175b1;
+      letter-spacing: 3px;
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
   <!-- Script -->
-  <!--<script src="../dist/kokk.js"></script>-->
   <script src="https://unpkg.com/kokk@latest/dist/kokk.js"></script>
   <!-- Start app -->
   <script>
-    const doc = new Kokk()
-//    doc.addComponent({
-//      order: 4,
-//      component: () => import('../components/Demo.vue')
-//    })
+    const doc = new Kokk({
+      titleClassname: 'title'
+    })
     doc.start('#app')
   </script>
 </body>
