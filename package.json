@@ -58,7 +58,7 @@
     "unfetch": "^3.0.0",
     "vue-cute-loading": "^0.0.2",
     "vue-cute-rate": "^0.0.6",
-    "vue-juri": "^0.0.5",
+    "vue-juri": "^0.0.6",
     "vue-router": "^3.0.1",
     "vue-style-loader": "^4.0.2"
   }

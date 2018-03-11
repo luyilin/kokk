@@ -1,19 +1,13 @@
-<!-- title-start -->
-
+---
 title: Half star
-
-<!-- title-stop -->
-
-<!-- desc-start -->
-
 desc: Support select half star.
-
-<!-- desc-stop -->
+---
 
 ```vue
 <template>
-  <star-rate :value="3"
-             type="star1"/>
+  <star-rate :value="2.5" type="star1"
+             :star-half="true"
+             :on-change="onChangeFn"/>
 </template>
 
 <script>
@@ -22,6 +16,11 @@ import StarRate from 'vue-cute-rate'
 export default {
   components: {
     StarRate
+  },
+  methods: {
+    onChangeFn (value) {
+      console.log(value)
+    }
   }
 }
 </script>

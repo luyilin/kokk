@@ -1,18 +1,11 @@
-<!-- title-start -->
-
+---
 title: Basic
-
-<!-- title-stop -->
-
-<!-- desc-start -->
-
 desc: The simplest usage.
-
-<!-- desc-stop -->
+---
 
 ```vue
 <template>
-  <star-rate :value="4"/>
+  <star-rate :value="3"/>
 </template>
 
 <script>
