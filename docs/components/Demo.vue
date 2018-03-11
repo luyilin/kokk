@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <juri :doc-list="['basic.md', 'half.md']" :expandAll="expandAll">
+    <juri :doc-list="['basic.md', 'half.md']" :expand-all="expandAll">
       <star-rate
         slot="demo-0"
         :value="3"/>
@@ -19,10 +19,16 @@
   import StarRate from 'vue-cute-rate'
 
   export default {
-    props: ['expandAll'],
     components: {
       Juri,
       StarRate
+    },
+
+    props: {
+      expandAll: {
+        type: Boolean,
+        default: false
+      }
     },
 
     methods: {
