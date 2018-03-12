@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <juri :doc-list="['basic.md', 'half.md']" :expand-all="expandAll">
+    <juri :doc-list="docList" :expand-all="expandAll">
       <star-rate
         slot="demo-0"
         :value="3"/>
@@ -15,26 +15,34 @@
 </template>
 
 <script>
-  import Juri from 'vue-juri'
-  import StarRate from 'vue-cute-rate'
+import Juri from 'vue-juri'
+import StarRate from 'vue-cute-rate'
+import basic from 'raw-loader!../docs/basic.md'
+import half from 'raw-loader!../docs/half.md'
 
-  export default {
-    components: {
-      Juri,
-      StarRate
-    },
+export default {
+  components: {
+    Juri,
+    StarRate
+  },
 
-    props: {
-      expandAll: {
-        type: Boolean,
-        default: false
-      }
-    },
+  props: {
+    expandAll: {
+      type: Boolean,
+      default: false
+    }
+  },
 
-    methods: {
-      onChangeFn (value) {
-        console.log(value)
-      }
+  data () {
+    return {
+      docList: [basic, half]
+    }
+  },
+
+  methods: {
+    onChangeFn (value) {
+      console.log(value)
     }
   }
+}
 </script>

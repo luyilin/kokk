@@ -1,6 +1,6 @@
 {
   "name": "kokk",
-  "version": "0.0.21",
+  "version": "1.0.0",
   "description": "A beautiful way to create a documentation from markdown.",
   "repository": {
     "url": "luyilin/kokk",
@@ -58,7 +58,7 @@
     "unfetch": "^3.0.0",
     "vue-cute-loading": "^0.0.2",
     "vue-cute-rate": "^0.0.6",
-    "vue-juri": "^0.0.6",
+    "vue-juri": "^0.0.8",
     "vue-router": "^3.0.1",
     "vue-style-loader": "^4.0.2"
   }
