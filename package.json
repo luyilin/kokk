@@ -26,13 +26,16 @@
     "extends": [
       "plugin:vue/recommended"
     ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
     "rules": {
       "vue/max-attributes-per-line": [
         2,
         {
-          "singleline": 2,
+          "singleline": 15,
           "multiline": {
-            "max": 2,
+            "max": 15,
             "allowFirstLine": true
           }
         }
@@ -40,6 +43,7 @@
     }
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.2",
     "eslint": "^4.14.0",
     "eslint-plugin-vue": "^4.0.1",
     "poi": "^9.3.10",
