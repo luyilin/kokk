@@ -1,7 +1,7 @@
 import Kokk from '../../src'
 
 const doc = new Kokk({
-  root: '/docs/',
+  root: 'https://raw.githubusercontent.com/luyilin/kokk/master/',
   titleClassname: 'title'
 })
 

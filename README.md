@@ -6,13 +6,13 @@
 
 [Github](https://github.com/luyilin/kokk)
 
-A [documentation](https://vue-cute-rate.netlify.com/example/dist/) for vue-cute-rate which powered by kokk.
+A [doc](https://vue-cute-rate.netlify.com) for vue-cute-rate which powered by kokk.
 
 ## Introduction
 
 KOKK is a tool that fetches a Markdown file and renders it as a beautiful one-page documentation.
 
-More than this, you can insert a vue component into the doc. In this doc, it use [vue-juri](https://github.com/luyilin/vue-juri) to display two demos and usages of [vue-cute-rate](https://github.com/luyilin/vue-cute-rate), seems cool, right? 😉
+More than this, you can insert a vue component into the doc. In this [example](https://vue-cute-rate.netlify.com), it use [vue-juri](https://github.com/luyilin/vue-juri) to inject two demos and usages of [vue-cute-rate](https://github.com/luyilin/vue-cute-rate) into the doc, seems cool, right? 😉
 
 The design is inspired by [Ant Design](https://ant.design/components/rate/)! I like the elegant way to display a documentation.
 
@@ -105,6 +105,13 @@ const doc = new Kokk(options)
 | titleClassname | The custom classname of title. The title defaults to the value of h1 title in the main markdown file. | string | - |
 | highlight | Whether to highlight code blocks, you can supply a function to customize this, use prismjs to highlight code by default. | boolean / function | true |
 | loadingColor | The color of the loading component. | string | #7175b1 |
+
+For ```root```, in many cases you already have ```README.md``` in your repo, there is no need to populate another file at ./docs/. Then just use a markdown file from url directly, like this
+```
+const doc = new Kokk({
+  root: 'https://raw.githubusercontent.com/luyilin/kokk/master/',
+})
+```
 
 ### doc.addComponent(options)
 
