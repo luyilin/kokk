@@ -100,13 +100,13 @@ const doc = new Kokk(options)
 
 | Property | Description | type | Default |
 | -------- | ----------- | ---- | ------- |
-| root | The path of the markdown file. | string | /docs/ |
+| root | The path of the markdown file. | string | ./ |
 | mainDoc | The main markdown file. | string | README.md |
 | titleClassname | The custom classname of title. The title defaults to the value of h1 title in the main markdown file. | string | - |
 | highlight | Whether to highlight code blocks, you can supply a function to customize this, use prismjs to highlight code by default. | boolean / function | true |
 | loadingColor | The color of the loading component. | string | #7175b1 |
 
-For ```root```, in many cases you already have ```README.md``` in your repo, there is no need to populate another file at ./docs/. Then just use a markdown file from url directly, like this
+For ```root```, in many cases you already have ```README.md``` in your repo, there is no need to populate another file at  ```./```, just use a markdown file from url directly, like this
 ```
 const doc = new Kokk({
   root: 'https://raw.githubusercontent.com/luyilin/kokk/master/',
