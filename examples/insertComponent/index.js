@@ -1,4 +1,4 @@
-import Kokk from '../../../src'
+import Kokk from 'kokk'
 
 const doc = new Kokk({
   root: 'https://raw.githubusercontent.com/luyilin/kokk/master/',
@@ -7,7 +7,7 @@ const doc = new Kokk({
 
 doc.addComponent({
   order: 4,
-  component: () => import('../components/Demo.vue')
+  component: () => import('./components/Demo.vue')
 })
 
 export default doc.start('#app')
