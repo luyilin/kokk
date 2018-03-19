@@ -12,7 +12,7 @@ A [doc](https://vue-cute-rate.netlify.com) for vue-cute-rate which powered by ko
 
 KOKK is a tool that fetches a Markdown file and renders it as a beautiful one-page documentation.
 
-More than this, you can insert a vue component into the doc. In this [example](https://vue-cute-rate.netlify.com), it use [vue-juri](https://github.com/luyilin/vue-juri) to inject two demos and usages of [vue-cute-rate](https://github.com/luyilin/vue-cute-rate) into the doc, seems cool, right? 😉
+More than this, you can insert a vue component into the doc. In this [example](https://vue-cute-rate.netlify.com), it use [vue-juri](https://github.com/luyilin/vue-juri) to insert two demos of [vue-cute-rate](https://github.com/luyilin/vue-cute-rate) into the doc, seems cool, right? 😉
 
 The design is inspired by [Ant Design](https://ant.design/components/rate/)! I like the elegant way to display a documentation.
 
@@ -24,7 +24,7 @@ The name is inspired by *Kokkoku* 💃
 yarn add kokk --save
 ```
 
-CDN: [UNPKG](https://unpkg.com/kokk/) | [jsDelivr](https://cdn.jsdelivr.net/npm/kokk/) (available as `window.kokk`)
+CDN: [UNPKG](https://unpkg.com/kokk/) | [jsDelivr](https://cdn.jsdelivr.net/npm/kokk/) (available as `window.Kokk`)
 
 ## Quick Start
 
