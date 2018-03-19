@@ -14,8 +14,7 @@
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext .js --ext .vue",
     "test": "npm run lint && npm run build",
-    "build": "poi build --component Kokk",
-    "example": "poi -c examples/insertComponent/dev/poi.config.js"
+    "build": "poi build --component Kokk"
   },
   "author": {
     "name": "luyilin",
