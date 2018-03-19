@@ -1,2 +1,4 @@
 [build]
   base    = "examples/insertComponent"
+  publish = "examples/insertComponent"
+  command = "yarn dev"
