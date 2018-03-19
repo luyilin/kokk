@@ -1,6 +1,6 @@
 {
   "name": "kokk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A beautiful way to create a documentation from markdown.",
   "repository": {
     "url": "luyilin/kokk",
@@ -15,7 +15,7 @@
     "lint": "eslint . --ext .js --ext .vue",
     "test": "npm run lint && npm run build",
     "build": "poi build --component Kokk",
-    "example": "poi -c docs/dev/poi.config.js"
+    "example": "poi -c examples/insertComponent/dev/poi.config.js"
   },
   "author": {
     "name": "luyilin",

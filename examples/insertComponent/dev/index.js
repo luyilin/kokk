@@ -1,4 +1,4 @@
-import Kokk from '../../src'
+import Kokk from '../../../src'
 
 const doc = new Kokk({
   root: 'https://raw.githubusercontent.com/luyilin/kokk/master/',
