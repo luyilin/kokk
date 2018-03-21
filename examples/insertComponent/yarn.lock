@@ -3617,8 +3617,8 @@ kokk@^0.0.5:
     vue-style-loader "^4.0.2"
 
 kokk@latest:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/kokk/-/kokk-1.0.2.tgz#3fb8e94c2e5242deddc05f94df0e010cec362d91"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/kokk/-/kokk-1.0.3.tgz#955cd11bf353d05aa2e18b06556127c55a0bc801"
   dependencies:
     jump.js "^1.0.2"
     marked3 "^0.5.2"
@@ -3630,8 +3630,6 @@ kokk@latest:
     throttleit "^1.0.0"
     unfetch "^3.0.0"
     vue-cute-loading "^0.0.2"
-    vue-cute-rate "^0.0.6"
-    vue-juri "^0.0.8"
     vue-router "^3.0.1"
     vue-style-loader "^4.0.2"
 
