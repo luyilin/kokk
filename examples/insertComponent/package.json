@@ -12,6 +12,7 @@
     "vue-juri": "^0.0.11"
   },
   "devDependencies": {
-    "poi": "^9.6.13"
+    "poi": "^9.6.13",
+    "babel-preset-poi": "^1.1.2"
   }
 }
