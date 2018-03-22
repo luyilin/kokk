@@ -1,6 +1,6 @@
 {
   "name": "kokk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A beautiful way to create a documentation from markdown, and insert a vue component into the doc as well.",
   "repository": {
     "url": "luyilin/kokk",
@@ -16,6 +16,10 @@
     "test": "npm run lint && npm run build",
     "build": "poi build --component Kokk"
   },
+  "keywords": [
+    "markdown",
+    "vue-component"
+  ],
   "author": {
     "name": "luyilin",
     "email": "luyilin12@gmail.com"
@@ -41,6 +45,7 @@
       ]
     }
   },
+  "eslintIgnore": ["examples/**"],
   "devDependencies": {
     "babel-eslint": "^8.2.2",
     "eslint": "^4.14.0",

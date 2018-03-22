@@ -1,6 +1,7 @@
 {
+  "description": "An example which used kokk to create a doc, and insert a vue component into it.",
   "scripts": {
-    "dev": "poi --port 4001",
+    "dev": "poi",
     "build": "poi build"
   },
   "dependencies": {
