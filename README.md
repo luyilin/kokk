@@ -4,6 +4,8 @@
 
 [DEMO](https://luyilin.github.io/kokk/)
 
+Here is another [DEMO](https://kokk.netlify.com/) which insert a component into the doc, the source code is in ```examples/insertComponent```.
+
 [Github](https://github.com/luyilin/kokk)
 
 A [doc](https://vue-cute-rate.netlify.com) for vue-cute-rate which powered by kokk.
