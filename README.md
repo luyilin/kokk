@@ -94,7 +94,7 @@ doc.start('#app')
 
 If you want to display some part on GitHub while keeping it invisible in kokk, you can use following html comment marks:
 
-```html
+```
 
 <!-- hide-on-kokk-start -->
 
@@ -116,7 +116,7 @@ For example, you can see an image down below while [viewing on GitHub](https://g
 
 If you want to hide some part on GitHub while keeping it visible in kokk, you can use following html comment marks:
 
-```html
+```
 <!-- show-on-kokk
 This part is not visible on github, as it's html comment :)
 But it's visible on your kokk website.
