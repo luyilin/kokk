@@ -91,17 +91,6 @@ export default {
     const menu = []
     let addComponent = this.addComponent
 
-    let DemoExist = 0
-    const DEMO_START = /^<!--\s*DEMO\s*-->/
-    const DEMO_HOLDER = '## DEMO-start'
-    renderer.html = html => {
-      if (DEMO_START.test(html)) {
-        DemoExist++
-        return DEMO_HOLDER
-      }
-      return html
-    }
-
     renderer.heading = (text, depth, raw) => {
       if (depth === 1 && this.titleClassname) {
         text = `<span class="${this.titleClassname}">${text}</span>`
@@ -117,10 +106,48 @@ export default {
       return orginalHeading(text, depth, raw)
     }
 
+    let DemoExist = 0
+    let hideCount = 0
+    const DEMO_START = /^<!--\s*DEMO\s*-->/
+    const DEMO_HOLDER = '## DEMO-start'
+    const HIDE_START = /^<!--\s*hide-on-kokk-start\s*-->/
+    const HIDE_STOP = /^<!--\s*hide-on-kokk-stop\s*-->/
+    const HIDE_START_HOLDER = '#!!!hide-start!!!'
+    const HIDE_STOP_HOLDER = '#!!!hide-stop!!!'
+    const SHOW_START = /^<!--\s*show-on-kokk\s*\n/
+    renderer.html = html => {
+      if (DEMO_START.test(html)) {
+        DemoExist++
+        return DEMO_HOLDER
+      }
+
+      if (HIDE_START.test(html)) {
+        hideCount++
+        return HIDE_START_HOLDER + hideCount
+      }
+      if (HIDE_STOP.test(html)) {
+        return HIDE_STOP_HOLDER + hideCount
+      }
+      if (SHOW_START.test(html)) {
+        return marked(html.replace(SHOW_START, '').replace(/^-->$/m, ''), {
+          highlight: this.highlight && highlightFn
+        })
+      }
+      return html
+    }
+
     let html = marked(content, {
       renderer,
       highlight: this.highlight && highlightFn
     })
+
+    for (let i = 0; i < hideCount; i++) {
+      const RE = new RegExp(
+        `${HIDE_START_HOLDER}${i + 1}([\\s\\S]*)${HIDE_STOP_HOLDER}${i + 1}`,
+        'gi'
+      )
+      html = html.replace(RE, '')
+    }
 
     if (DemoExist) {
       const RE = new RegExp(`${DEMO_HOLDER}`, 'gi')

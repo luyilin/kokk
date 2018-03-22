@@ -6,7 +6,9 @@
 
 Here is another [DEMO](https://kokk.netlify.com/) which insert a component into the doc, the source code is in ```examples/insertComponent```.
 
+<!-- show-on-kokk
 [Github](https://github.com/luyilin/kokk)
+-->
 
 A [doc](https://vue-cute-rate.netlify.com) for vue-cute-rate which powered by kokk.
 
@@ -87,6 +89,46 @@ doc.addComponent({
 
 doc.start('#app')
 ```
+
+### Hide content in documentation
+
+If you want to display some part on GitHub while keeping it invisible in kokk, you can use following html comment marks:
+
+```html
+
+<!-- hide-on-kokk-start -->
+
+This part is not visible while viewing as a kokk website.
+
+<!-- hide-on-kokk-stop -->
+
+```
+
+For example, you can see an image down below while [viewing on GitHub](https://github.com/luyilin/kokk#hide-content-in-documentation).
+
+<!-- hide-on-kokk-start -->
+
+![hide-image](https://wx4.sinaimg.cn/mw690/a2117cdbly1fplz04usrhj20go09d45v.jpg)
+
+<!-- hide-on-kokk-stop -->
+
+### Show content in documentation
+
+If you want to hide some part on GitHub while keeping it visible in kokk, you can use following html comment marks:
+
+```html
+<!-- show-on-kokk
+This part is not visible on github, as it's html comment :)
+But it's visible on your kokk website.
+All markdown features except html comments are supported here.
+-->
+```
+
+If you're on the kokk website, you can see an image down below.
+
+<!-- show-on-kokk
+![hide-image](https://wx4.sinaimg.cn/mw690/a2117cdbly1fplz04usrhj20go09d45v.jpg)
+-->
 
 <!-- DEMO -->
 
