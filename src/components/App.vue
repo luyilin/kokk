@@ -10,7 +10,7 @@
         <h2 class="demo-title" :id="exampleSlug"
             v-if="addComponent">
           <span v-html="exampleTitleWrap"/>
-          <svg @click="expandAll = !expandAll"
+          <svg v-if="showExpandIcon" @click="expandAll = !expandAll"
                t="1519462199298" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2155" xmlns:xlink="http://www.w3.org/1999/xlink"><defs/><path d="M411.485726 111.200056H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 111.200056H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.2786a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V154.550088a43.350032 43.350032 0 0 0-43.350032-43.350032zM411.485726 554.844281H138.199901a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.285825a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032zM879.384294 554.844281H606.105694a43.350032 43.350032 0 0 0-43.350032 43.350032v273.285825a43.350032 43.350032 0 0 0 43.350032 43.350032h273.2786a43.350032 43.350032 0 0 0 43.350032-43.350032V598.194313a43.350032 43.350032 0 0 0-43.350032-43.350032z" fill="#515151" p-id="2156"/></svg>
         </h2>
         <component
@@ -52,7 +52,7 @@ export default {
   },
   data () {
     let {titleClassname, root, mainDoc, highlight, loadingColor} = this.config
-    let {addComponent, title, order, component} = this.component
+    let {addComponent, title, order, component, showExpandIcon} = this.component
     return {
       expandAll: false,
       html: '',
@@ -70,7 +70,8 @@ export default {
       loadingColor: loadingColor,
       exampleTitle: title,
       exampleOrder: order,
-      exampleComponent: component
+      exampleComponent: component,
+      showExpandIcon: showExpandIcon
     }
   },
 

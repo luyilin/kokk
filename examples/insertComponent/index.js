@@ -7,7 +7,8 @@ const doc = new Kokk({
 
 doc.addComponent({
   order: 4,
-  component: () => import('./components/Demo.vue')
+  component: () => import('./components/Demo.vue'),
+  showExpandIcon: true
 })
 
 export default doc.start('#app')

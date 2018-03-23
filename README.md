@@ -166,6 +166,7 @@ const doc = new Kokk({
 | title | The title of the example part. | string | Examples |
 | order | The order of the example part in the documentation, set this to implement the menu. | number | 3 |
 | component | The vue component which you want to import | function | () => {} |
+| showExpandIcon | Show a expand svg or not. The option will be useful when you use vue-juri to show a list of demos :D | boolean | false |
 
 ### doc.start(target)
 

@@ -15,7 +15,8 @@ class Kokk {
       addComponent: false,
       title: 'Examples',
       order: 3,
-      component: () => {}
+      component: () => {},
+      showExpandIcon: false
     }
   }
   addComponent(i) {
